@@ -5,6 +5,8 @@ import Person from './Person/Person';
 import ValidationComponent from "./Assignment2/ValidationComponent";
 import CharComponent from "./Assignment2/CharComponent";
 
+import {Button} from 'react-bootstrap';
+
 class App extends Component {
 
   state = {
@@ -63,11 +65,15 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black',
+      }
     };
 
     let persons = null;
@@ -86,7 +92,13 @@ class App extends Component {
             )
           })};
         </div>
-      )
+      );
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black',
+      }
     }
 
     let chars = null;
@@ -109,10 +121,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hello world from ReactJS test</h1>
-        <button style={style}
-                onClick={() => this.togglePersonsHandler()}>
-          Toggle Persons
-        </button>
+
+        <Button onClick={() => this.togglePersonsHandler()}> React Button </Button>
 
         {/*output persons here, either div or null*/}
         {persons}
@@ -126,8 +136,6 @@ class App extends Component {
         <p> Text Length: {this.state.fieldLength}</p>
 
         <ValidationComponent length={this.state.fieldLength}/>
-
-        {console.log('chars', chars)}
 
         {chars}
 
