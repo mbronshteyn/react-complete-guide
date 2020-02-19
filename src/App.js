@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import List from './JsonList/List';
 
 import ValidationComponent from "./Assignment2/ValidationComponent";
 import CharComponent from "./Assignment2/CharComponent";
@@ -24,6 +25,11 @@ class App extends Component {
   togglePersonsHandler = (event) => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
+  };
+
+  getJsonHandler = async (event) => {
+    const jsonData = fetch('https://jsonplaceholder.typicode.com/posts/1');
+    this.setState({jsonData});
   };
 
   userInputHandler = (event) => {
@@ -122,7 +128,14 @@ class App extends Component {
       <div className="App">
         <h1>Hello world from ReactJS test</h1>
 
-        <Button onClick={() => this.togglePersonsHandler()}> React Button </Button>
+        <Button variant="primary" onClick={() => this.togglePersonsHandler()}>
+          Toggle persons
+        </Button>
+
+        <List id='2'/>
+
+
+        <p> {this.state.jsonData} </p>
 
         {/*output persons here, either div or null*/}
         {persons}
