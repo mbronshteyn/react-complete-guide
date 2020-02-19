@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import axios from 'axios';
 
-class List extends Component {
+class GetJson extends Component {
 
   constructor(props) {
     super(props);
@@ -14,26 +14,22 @@ class List extends Component {
   }
 
   componentDidMount() {
-    console.log('in component did mount');
     axios.get(`https://jsonplaceholder.typicode.com/posts/${this.state.id}`)
       .then(response => response.data)
       .then((data) => this.setState({
         title: data.title,
         body: data.body
       }));
-
   }
 
   render() {
-    console.log('Data', this.state.data);
     return (
       <div>
-        <h1>'Hello world from List!!!' </h1>
-        <h4> Title: {this.state.title}</h4>
-        <h4>Body: {this.state.body} </h4>
+        <p> Title: {this.state.title}</p>
+        <p>Body: {this.state.body} </p>
       </div>
     )
   }
 }
 
-export default List;
+export default GetJson;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import List from './JsonList/List';
+import GetJson from './JsonList/GetJson';
 
 import ValidationComponent from "./Assignment2/ValidationComponent";
 import CharComponent from "./Assignment2/CharComponent";
@@ -132,7 +132,7 @@ class App extends Component {
           Toggle persons
         </Button>
 
-        <List id='2'/>
+        <GetJson id='2'/>
 
 
         <p> {this.state.jsonData} </p>
