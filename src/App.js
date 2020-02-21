@@ -146,7 +146,7 @@ class App extends Component {
     let {loading} = this.state;
 
     return (
-      <div className="App"><h1>Hello world from ReactJS test</h1>
+      <div className="App"><h1>My ReactJS sandbox</h1>
 
         <Button variant="primary" onClick={() => this.togglePersonsHandler()}>
           Toggle persons
@@ -154,7 +154,7 @@ class App extends Component {
 
         <p/>
 
-        <Button variant="primary" disabled={this.state.loading} onClick={() => this.getNewMessage()}>
+        <Button variant="primary" disabled={loading} onClick={() => this.getNewMessage()}>
           {loading && <i className='fa fa-refresh fa-spin'></i>}
           {loading && <span> Loading Joke</span>}
           {!loading && <span>Get New Joke</span>}
