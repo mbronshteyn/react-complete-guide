@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import JsonMessage from './JsonList/JsonMessage'
+import Message from './JsonList/Message'
 
 import ValidationComponent from "./Assignment2/ValidationComponent";
 import CharComponent from "./Assignment2/CharComponent";
@@ -19,7 +19,6 @@ class App extends Component {
     ],
     userName: 'default',
     showPersons: false,
-    inputText: null,
     fieldLength: 0,
   };
 
@@ -28,14 +27,13 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   };
 
-  getNewMessage = () => {
-    let id = Math.floor(Math.random() * 30);
-    axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
-      .then(response => response.data)
-      .then((data) => this.setState({
-        title: data.title,
-        body: data.body
-      }));
+  getNewMessage = async () => {
+
+    let {data} = await axios.get('http://api.icndb.com/jokes/random');
+
+    this.setState({
+      joke: data.value.joke.replace(/&quot;/g, '\\"')
+    });
   };
 
   userInputHandler = (event) => {
@@ -131,10 +129,11 @@ class App extends Component {
     }
 
     let msg = null;
-    if (this.state.title) {
+    if (this.state.joke) {
       msg = (
         <div>
-          <JsonMessage title={this.state.title} body={this.state.body}/>
+          <p/>
+          <Message body={this.state.joke}/>
         </div>
       )
     }
@@ -150,7 +149,7 @@ class App extends Component {
         <p/>
 
         <Button variant="primary" onClick={() => this.getNewMessage()}>
-          Get New Message
+          Get New Joke
         </Button>
 
         {msg}
