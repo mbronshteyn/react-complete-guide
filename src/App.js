@@ -156,8 +156,7 @@ class App extends Component {
 
         <Button variant="primary" disabled={loading} onClick={() => this.getNewMessage()}>
           {loading && <i className='fa fa-refresh fa-spin'></i>}
-          {loading && <span> Loading Joke</span>}
-          {!loading && <span>Get New Joke</span>}
+          {loading ? <span> Loading Joke</span> : <span>Get New Joke</span>}
         </Button>
 
         {msg}
