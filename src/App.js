@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import GetJson from './JsonList/GetJson';
+import JsonMessage from './JsonList/JsonMessage'
 
 import ValidationComponent from "./Assignment2/ValidationComponent";
 import CharComponent from "./Assignment2/CharComponent";
 
 import {Button} from 'react-bootstrap';
+import axios from "axios";
 
 class App extends Component {
 
@@ -27,9 +28,14 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   };
 
-  getJsonHandler = async (event) => {
-    const jsonData = fetch('https://jsonplaceholder.typicode.com/posts/1');
-    this.setState({jsonData});
+  getNewMessage = () => {
+    let id = Math.floor(Math.random() * 30);
+    axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(response => response.data)
+      .then((data) => this.setState({
+        title: data.title,
+        body: data.body
+      }));
   };
 
   userInputHandler = (event) => {
@@ -124,18 +130,31 @@ class App extends Component {
       )
     }
 
+    let msg = null;
+    if (this.state.title) {
+      msg = (
+        <div>
+          <JsonMessage title={this.state.title} body={this.state.body}/>
+        </div>
+      )
+    }
+
+
     return (
-      <div className="App">
-        <h1>Hello world from ReactJS test</h1>
+      <div className="App"><h1>Hello world from ReactJS test</h1>
 
         <Button variant="primary" onClick={() => this.togglePersonsHandler()}>
           Toggle persons
         </Button>
 
-        <GetJson id='2'/>
+        <p/>
 
+        <Button variant="primary" onClick={() => this.getNewMessage()}>
+          Get New Message
+        </Button>
 
-        <p> {this.state.jsonData} </p>
+        {msg}
+
 
         {/*output persons here, either div or null*/}
         {persons}
