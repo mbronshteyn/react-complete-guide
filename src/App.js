@@ -20,6 +20,7 @@ class App extends Component {
     userName: 'default',
     showPersons: false,
     fieldLength: 0,
+    loading: false,
   };
 
   togglePersonsHandler = (event) => {
@@ -29,11 +30,15 @@ class App extends Component {
 
   getNewMessage = async () => {
 
+    this.setState({loading: true});
+
     let {data} = await axios.get('http://api.icndb.com/jokes/random');
 
     this.setState({
       joke: data.value.joke.replace(/&quot;/g, '\"')
     });
+
+    this.setState({loading: false});
   };
 
   userInputHandler = (event) => {
@@ -138,6 +143,7 @@ class App extends Component {
       )
     }
 
+    let {loading} = this.state;
 
     return (
       <div className="App"><h1>Hello world from ReactJS test</h1>
@@ -148,8 +154,10 @@ class App extends Component {
 
         <p/>
 
-        <Button variant="primary" onClick={() => this.getNewMessage()}>
-          Get New Joke
+        <Button variant="primary" disabled={this.state.loading} onClick={() => this.getNewMessage()}>
+          {loading && <i className='fa fa-refresh fa-spin'></i>}
+          {loading && <span> Loading Joke</span>}
+          {!loading && <span>Get New Joke</span>}
         </Button>
 
         {msg}
