@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './components/Persons/Person/Person';
-import Message from './components/Message'
+import Person from '../components/Persons/Person/Person';
+import Message from '../components/Message'
 
-import ValidationComponent from "./Assignment2/ValidationComponent";
-import CharComponent from "./Assignment2/CharComponent";
+import ValidationComponent from "../Assignment2/ValidationComponent";
+import CharComponent from "../Assignment2/CharComponent";
 
 import {Button} from 'react-bootstrap';
 import axios from "axios";
@@ -29,16 +29,22 @@ class App extends Component {
   };
 
   getNewMessage = async () => {
+    try {
 
-    this.setState({loading: true});
+      this.setState({loading: true});
 
-    let {data} = await axios.get('http://api.icndb.com/jokes/random');
+      let {data} = await axios.get('http://api.icndb.com/jokes/random');
 
-    this.setState({
-      joke: data.value.joke.replace(/&quot;/g, '\"')
-    });
+      this.setState({
+        joke: data.value.joke.replace(/&quot;/g, '\"')
+      });
 
-    this.setState({loading: false});
+      this.setState({loading: false});
+
+    } catch (e) {
+
+      console.log(e);
+    }
   };
 
   userInputHandler = (event) => {
