@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './Person/Person';
-import Message from './JsonList/Message'
+import Person from './components/Persons/Person/Person';
+import Message from './components/Message'
 
 import ValidationComponent from "./Assignment2/ValidationComponent";
 import CharComponent from "./Assignment2/CharComponent";
