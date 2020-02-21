@@ -32,7 +32,7 @@ class App extends Component {
     let {data} = await axios.get('http://api.icndb.com/jokes/random');
 
     this.setState({
-      joke: data.value.joke.replace(/&quot;/g, '\\"')
+      joke: data.value.joke.replace(/&quot;/g, '\"')
     });
   };
 
