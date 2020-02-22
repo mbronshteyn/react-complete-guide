@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
-import Message from '../components/Message'
+import Message from '../components/Message/Message'
 
 import ValidationComponent from "../Assignment2/ValidationComponent";
 import CharComponent from "../Assignment2/CharComponent";
@@ -133,6 +133,9 @@ class App extends Component {
           Toggle persons
         </Button>
 
+        {/*if persons are there, display it*/}
+        {persons}
+
         <p/>
 
         <Button variant="primary" disabled={loading} onClick={() => this.getNewMessage()}>
@@ -150,8 +153,6 @@ class App extends Component {
         {/*if joke is there, display it*/}
         {joke}
 
-        {/*if persons are there, display it*/}
-        {persons}
 
         <p></p>
 
