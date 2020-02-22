@@ -4,7 +4,7 @@ const Message = (props) => {
 
   return (
     <div className='UserOutput'>
-      <p>joke: {props.body}</p>
+      <p> joke: {props.body} </p>
     </div>
   );
 };

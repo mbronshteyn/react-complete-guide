@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 import Message from '../components/Message'
 
 import ValidationComponent from "../Assignment2/ValidationComponent";
 import CharComponent from "../Assignment2/CharComponent";
 
 import {Button} from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner'
 import axios from "axios";
 
 class App extends Component {
@@ -36,7 +37,7 @@ class App extends Component {
       let {data} = await axios.get('http://api.icndb.com/jokes/random');
 
       this.setState({
-        joke: data.value.joke.replace(/&quot;/g, '\"')
+        joke: data.value.joke.replace(/&quot;/g, '"')
       });
 
       this.setState({loading: false});
@@ -85,45 +86,19 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      }
-    };
-
     let persons = null;
-
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-                key={person.id}
-                name={person.name}
-                age={person.age}/>
-            )
-          })};
+          <Persons
+            persons={this.state.persons}
+            click={() => this.deletePersonHandler}
+            changed={(event) => this.nameChangedHandler}/>
         </div>
       );
-
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black',
-      }
     }
 
     let chars = null;
-
     if (this.state.inputText) {
       const charArray = this.state.inputText.split('');
       chars = (
@@ -139,9 +114,9 @@ class App extends Component {
       )
     }
 
-    let msg = null;
+    let joke = null;
     if (this.state.joke) {
-      msg = (
+      joke = (
         <div>
           <p/>
           <Message body={this.state.joke}/>
@@ -161,14 +136,21 @@ class App extends Component {
         <p/>
 
         <Button variant="primary" disabled={loading} onClick={() => this.getNewMessage()}>
-          {loading && <i className='fa fa-refresh fa-spin'></i>}
-          {loading ? <span> Loading Joke</span> : <span>Get New Joke</span>}
+          {loading &&
+          <Spinner
+            as="span"
+            animation="grow"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />}
+          {loading ? <span>Loading...</span> : <span>Get New Joke</span>}
         </Button>
 
-        {msg}
+        {/*if joke is there, display it*/}
+        {joke}
 
-
-        {/*output persons here, either div or null*/}
+        {/*if persons are there, display it*/}
         {persons}
 
         <p></p>
@@ -176,7 +158,10 @@ class App extends Component {
         {/*<UserInput oldUserName={this.state.userName} changed={this.userInputHandler}/>*/}
         {/*<UserOutput userName={this.state.userName}/>*/}
 
-        <input type="text" onChange={this.fieldLengthHandler} placeholder='Enter your text'/>
+        <input type="text"
+               onChange={this.fieldLengthHandler}
+               placeholder='Input your text'/>
+
         <p> Text Length: {this.state.fieldLength}</p>
 
         <ValidationComponent length={this.state.fieldLength}/>
