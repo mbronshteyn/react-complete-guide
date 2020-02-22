@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
 import Message from '../components/Message/Message'
-
-import ValidationComponent from "../Assignment2/ValidationComponent";
 import CharComponent from "../Assignment2/CharComponent";
 
 import {Button} from 'react-bootstrap';
@@ -140,14 +138,8 @@ class App extends Component {
 
         <Button variant="primary" disabled={loading} onClick={() => this.getNewMessage()}>
           {loading &&
-          <Spinner
-            as="span"
-            animation="grow"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />}
-          {loading ? <span>Loading...</span> : <span>Get New Joke</span>}
+          <Spinner size="sm" animation="border"/>}
+          {loading ? <span>   Loading...</span> : <span>Get New Joke</span>}
         </Button>
 
         {/*if joke is there, display it*/}
@@ -159,15 +151,15 @@ class App extends Component {
         {/*<UserInput oldUserName={this.state.userName} changed={this.userInputHandler}/>*/}
         {/*<UserOutput userName={this.state.userName}/>*/}
 
-        <input type="text"
-               onChange={this.fieldLengthHandler}
-               placeholder='Input your text'/>
+        {/*<input type="text"*/}
+        {/*       onChange={this.fieldLengthHandler}*/}
+        {/*       placeholder='Input your text'/>*/}
 
-        <p> Text Length: {this.state.fieldLength}</p>
+        {/*<p> Text Length: {this.state.fieldLength}</p>*/}
 
-        <ValidationComponent length={this.state.fieldLength}/>
+        {/*<ValidationComponent length={this.state.fieldLength}/>*/}
 
-        {chars}
+        {/*{chars}*/}
 
       </div>
     );
