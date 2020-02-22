@@ -125,7 +125,7 @@ class App extends Component {
     let {loading} = this.state;
 
     return (
-      <div className="App"><h1>My ReactJS sandbox</h1>
+      <div className="App"><h1>{this.props.appTitle}</h1>
 
         <Button variant="primary" onClick={() => this.togglePersonsHandler()}>
           Toggle persons
