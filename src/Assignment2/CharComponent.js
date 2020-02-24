@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const CharComponent = (props) => {
 
@@ -18,6 +19,10 @@ const CharComponent = (props) => {
       <p onClick={props.click}> {props.element} </p>
     </div>
   )
+};
+
+CharComponent.propTypes = {
+  click: PropTypes.func,
 };
 
 export default CharComponent;

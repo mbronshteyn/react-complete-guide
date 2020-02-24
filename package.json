@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "nodeman": "^1.1.2",
+    "prop-types": "^15.7.2",
     "radium": "^0.26.0",
     "react": "^16.12.0",
     "react-axios": "^2.0.3",

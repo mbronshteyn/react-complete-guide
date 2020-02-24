@@ -22,6 +22,16 @@ class App extends Component {
     loading: false,
   };
 
+  // lifecycle methods
+  componentDidMount() {
+    console.log('component did mount');
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('componentDidUpdate');
+  }
+
+
   togglePersonsHandler = (event) => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
@@ -123,6 +133,7 @@ class App extends Component {
     }
 
     let {loading} = this.state;
+
 
     return (
       <div className="App"><h1>{this.props.appTitle}</h1>
