@@ -8,6 +8,8 @@ import {Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner'
 import axios from "axios";
 
+import AuthContext from '../context/auth-context'
+
 class App extends Component {
 
   state = {
@@ -30,6 +32,12 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('componentDidUpdate');
   }
+
+  loginHandler = () => {
+    { /* for now */
+    }
+    return true;
+  };
 
 
   togglePersonsHandler = (event) => {
@@ -137,10 +145,14 @@ class App extends Component {
 
     return (
       <div className="App"><h1>{this.props.appTitle}</h1>
-
-        <Button variant="primary" onClick={() => this.togglePersonsHandler()}>
-          Toggle persons
-        </Button>
+        <AuthContext.Provider value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler
+        }}>
+          <Button variant="primary" onClick={() => this.togglePersonsHandler()}>
+            Toggle persons
+          </Button>
+        </AuthContext.Provider>
 
         {/*if persons are there, display it*/}
         {persons}

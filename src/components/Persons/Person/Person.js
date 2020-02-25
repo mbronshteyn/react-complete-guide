@@ -6,6 +6,7 @@ const person = (props) => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const inputRef = useRef(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
